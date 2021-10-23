@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import defaultImage from './defaultImage.jpeg';
 import s from './MovieCard.module.css';
 import MovieCardExtraInfo from 'components/MovieCardExtraInfo/MovieCardExtraInfo';
@@ -38,3 +40,7 @@ export default function MovieCard({
     </>
   );
 }
+
+MovieCard.propTypes = {
+  movie: PropTypes.object.isRequired,
+};

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import { getMovieCast } from 'services/movieLib-api';
 import defaultAvatar from './defaultAvatar.png';
@@ -6,6 +7,7 @@ import s from './Cast.module.css';
 
 export default function Cast({ movieId }) {
   const [cast, setCast] = useState(null);
+
   useEffect(() => {
     getMovieCast(movieId).then(response => {
       setCast(Object.values(response.data.cast));
@@ -40,3 +42,7 @@ export default function Cast({ movieId }) {
     </>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

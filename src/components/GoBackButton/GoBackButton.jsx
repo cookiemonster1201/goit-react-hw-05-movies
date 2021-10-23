@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 export default function GoBackButton({ onClick }) {
   return (
     <button
@@ -13,3 +14,7 @@ export default function GoBackButton({ onClick }) {
     </button>
   );
 }
+
+GoBackButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};

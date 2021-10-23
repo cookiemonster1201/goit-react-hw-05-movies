@@ -8,7 +8,6 @@ import MovieList from 'components/MovieList/MovieList';
 import LoadMoreButton from 'components/LoadMoreButtom/LoadMoreButton';
 
 export default function MovieSearch() {
-  // const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const history = useHistory();
   const location = useLocation();

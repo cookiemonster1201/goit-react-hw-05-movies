@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, useLocation, useHistory } from 'react-router-dom';
 
 import { fetchTrendingMovies } from '../services/movieLib-api';
 import PageHeading from '../components/PageHeading/PageHeading';
@@ -8,18 +8,25 @@ import LoadMoreButton from 'components/LoadMoreButtom/LoadMoreButton';
 
 export default function Homepage() {
   const { url } = useRouteMatch();
-  const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
+  const history = useHistory();
+  let searchPage = new URLSearchParams(location.search).get('page')
+    ? Number(new URLSearchParams(location.search).get('page'))
+    : 1;
 
-  const showMovies = () => {
+  const showMovies = page => {
     fetchTrendingMovies(page).then(response => {
       setMovies(prevMovies => [...prevMovies, ...response.data.results]);
     });
-    setPage(prevPage => (prevPage += 1));
+    history.push({
+      ...location,
+      search: `page=${searchPage}`,
+    });
   };
 
   useEffect(() => {
-    showMovies();
+    showMovies(searchPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -29,7 +36,11 @@ export default function Homepage() {
       {movies && (
         <>
           <MovieList movies={movies} url={url} />
-          <LoadMoreButton onClick={showMovies} />
+          <LoadMoreButton
+            onClick={() => {
+              showMovies((searchPage += 1));
+            }}
+          />
         </>
       )}
     </>
