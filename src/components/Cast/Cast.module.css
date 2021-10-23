@@ -1,0 +1,21 @@
+.list {
+  text-align: center;
+}
+
+.img {
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.name {
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.part {
+  font-weight: bold;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 30px;
+}

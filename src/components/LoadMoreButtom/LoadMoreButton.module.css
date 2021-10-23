@@ -1,0 +1,11 @@
+.button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: palegreen;
+  color: rgb(26, 43, 26);
+  border-radius: 5px;
+  cursor: pointer;
+}
