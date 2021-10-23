@@ -113,6 +113,8 @@ dist
 /coverage
 
 # production
+/.yarn
+/.netlify
 /build
 
 # misc
@@ -128,8 +130,6 @@ yarn-error.log*
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/.yarn
-/.netlify
 /node_modules
 /.pnp
 .pnp.js
