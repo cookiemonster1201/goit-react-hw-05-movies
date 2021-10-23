@@ -16,7 +16,9 @@ const Cast = lazy(
 );
 
 export default function MovieDetailsPage() {
-  const { movieId } = useParams();
+  const { slug } = useParams();
+  const movieId = slug.match(/[a-z0-9]+$/)[0];
+  console.log(slug);
   const [movie, setMovie] = useState(null);
   const location = useLocation();
   const history = useHistory();
@@ -51,11 +53,11 @@ export default function MovieDetailsPage() {
           />
         }
       >
-        <Route path="/movies/:movieId/cast" exact>
+        <Route path="/movies/:slug/cast" exact>
           <Cast movieId={movieId} />
         </Route>
 
-        <Route path="/movies/:movieId/reviews" exact>
+        <Route path="/movies/:slug/reviews" exact>
           <Reviews movieId={movieId} />
         </Route>
       </Suspense>

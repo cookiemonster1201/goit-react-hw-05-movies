@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import slugify from 'slugify';
 
 import s from './MovieList.module.css';
 
@@ -11,7 +12,9 @@ export default function MovieList({ movies, url = '' }) {
         <li key={movie.id} className={s.item}>
           <Link
             to={{
-              pathname: `${url}movies/${movie.id}`,
+              pathname: `${url}movies/${slugify(`${movie.title} ${movie.id}`, {
+                lower: true,
+              })}`,
               state: { from: location },
             }}
             className={s.link}
