@@ -17,8 +17,6 @@ export default function MovieSearch() {
     ? Number(new URLSearchParams(location.search).get('page'))
     : 0;
 
-  console.log(searchPage, location);
-
   useEffect(() => {
     if (location.search === '') {
       return;
