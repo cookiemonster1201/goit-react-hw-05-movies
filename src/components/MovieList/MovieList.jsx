@@ -14,7 +14,7 @@ export default function MovieList({ movies, url = '', location }) {
               pathname: `${url}movies/${slugify(`${movie.title} ${movie.id}`, {
                 lower: true,
               })}`,
-              state: { from: `${location.pathname}${location.search}` },
+              state: { from: location },
             }}
             className={s.link}
           >

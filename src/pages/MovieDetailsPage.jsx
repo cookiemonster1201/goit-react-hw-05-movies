@@ -1,4 +1,10 @@
-import { useParams, Route, useLocation, useHistory } from 'react-router-dom';
+import {
+  useParams,
+  Route,
+  useLocation,
+  useHistory,
+  Switch,
+} from 'react-router-dom';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
@@ -78,13 +84,15 @@ export default function MovieDetailsPage() {
           />
         }
       >
-        <Route path="/movies/:slug/cast" exact>
-          <Cast movieId={movieId} />
-        </Route>
+        <Switch>
+          <Route path="/movies/:slug/cast" exact>
+            <Cast movieId={movieId} />
+          </Route>
 
-        <Route path="/movies/:slug/reviews" exact>
-          <Reviews movieId={movieId} />
-        </Route>
+          <Route path="/movies/:slug/reviews" exact>
+            <Reviews movieId={movieId} />
+          </Route>
+        </Switch>
       </Suspense>
     </>
   );
