@@ -31,19 +31,13 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const [trailers, setTrailers] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [from, setFrom] = useState(null);
 
   const location = useLocation();
   const history = useHistory();
 
   const goBack = () => {
-    history.push(from ?? '/');
+    history.push(location.state.from ?? '/');
   };
-
-  useEffect(() => {
-    setFrom(location.state.from);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     getMovieDetails(movieId).then(response => {
@@ -63,7 +57,11 @@ export default function MovieDetailsPage() {
       {movie && (
         <>
           <GoBackButton onClick={goBack} />
-          <MovieCard movie={movie} watchTrailer={toggleModal} />
+          <MovieCard
+            movie={movie}
+            watchTrailer={toggleModal}
+            location={location.state.from}
+          />
         </>
       )}
 

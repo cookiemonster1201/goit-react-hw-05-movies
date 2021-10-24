@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import s from './MovieCardExtraInfo.module.css';
 import WatchTrailerButton from 'components/WatchTrailerButton/WatchTrailerButton';
 
-export default function MovieCardExtraInfo({ watchTrailer }) {
+export default function MovieCardExtraInfo({ watchTrailer, location }) {
   const { url } = useRouteMatch();
   return (
     <div className={s.extraInfo}>
@@ -13,14 +13,20 @@ export default function MovieCardExtraInfo({ watchTrailer }) {
       <ul>
         <li>
           <NavLink
-            to={`${url}/cast`}
+            to={{
+              pathname: `${url}/cast`,
+              state: { from: location },
+            }}
             className={s.link}
             activeClassName={s.activeLink}
           >
             Cast
           </NavLink>
           <NavLink
-            to={`${url}/reviews`}
+            to={{
+              pathname: `${url}/reviews`,
+              state: { from: location },
+            }}
             className={s.link}
             activeClassName={s.activeLink}
           >
@@ -34,4 +40,5 @@ export default function MovieCardExtraInfo({ watchTrailer }) {
 
 MovieCardExtraInfo.propTypes = {
   watchTrailer: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
 };

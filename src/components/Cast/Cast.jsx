@@ -16,7 +16,7 @@ export default function Cast({ movieId }) {
 
   return (
     <>
-      {cast && (
+      {cast.length > 0 ? (
         <ul className={s.list}>
           {cast.map(({ name, character, id, profile_path }) => (
             <li key={id} className={s.item}>
@@ -38,6 +38,10 @@ export default function Cast({ movieId }) {
             </li>
           ))}
         </ul>
+      ) : (
+        <p style={{ textAlign: 'center', padding: '20px' }}>
+          Sorry, we don't have any information on the cast.
+        </p>
       )}
     </>
   );
