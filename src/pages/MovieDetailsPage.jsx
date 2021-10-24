@@ -6,6 +6,9 @@ import Loader from 'react-loader-spinner';
 import { getMovieDetails } from '../services/movieLib-api';
 import MovieCard from 'components/MovieCard/MovieCard';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
+import Modal from 'components/Modal/Modal';
+import TrailerFrame from 'components/TrailerFrame/TrailerFrame';
+import { getMovieTrailer } from '../services/movieLib-api';
 
 const Reviews = lazy(
   () =>
@@ -18,28 +21,50 @@ const Cast = lazy(
 export default function MovieDetailsPage() {
   const { slug } = useParams();
   const movieId = slug.match(/[a-z0-9]+$/)[0];
-  console.log(slug);
+
   const [movie, setMovie] = useState(null);
+  const [trailers, setTrailers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [from, setFrom] = useState(null);
+
   const location = useLocation();
   const history = useHistory();
 
   const goBack = () => {
-    history.push(location?.state?.from ?? '/');
+    history.push(from ?? '/');
   };
+
+  useEffect(() => {
+    setFrom(location.state.from);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     getMovieDetails(movieId).then(response => {
       setMovie(response.data);
     });
+    getMovieTrailer(movieId).then(response => {
+      setTrailers(response.data.results);
+    });
   }, [movieId]);
+
+  function toggleModal() {
+    setShowModal(modal => !modal);
+  }
 
   return (
     <>
       {movie && (
         <>
           <GoBackButton onClick={goBack} />
-          <MovieCard movie={movie} />
+          <MovieCard movie={movie} watchTrailer={toggleModal} />
         </>
+      )}
+
+      {showModal && (
+        <Modal closeModal={toggleModal}>
+          <TrailerFrame trailer={trailers[0]} />
+        </Modal>
       )}
 
       <Suspense

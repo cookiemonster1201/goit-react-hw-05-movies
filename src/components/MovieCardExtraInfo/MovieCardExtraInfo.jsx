@@ -1,11 +1,15 @@
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import s from './MovieCardExtraInfo.module.css';
+import PropTypes from 'prop-types';
 
-export default function MovieCardExtraInfo() {
+import s from './MovieCardExtraInfo.module.css';
+import WatchTrailerButton from 'components/WatchTrailerButton/WatchTrailerButton';
+
+export default function MovieCardExtraInfo({ watchTrailer }) {
   const { url } = useRouteMatch();
   return (
     <div className={s.extraInfo}>
       <h1 className={s.subTitle}>Additional information</h1>
+      {<WatchTrailerButton watchTrailer={watchTrailer} />}
       <ul>
         <li>
           <NavLink
@@ -27,3 +31,7 @@ export default function MovieCardExtraInfo() {
     </div>
   );
 }
+
+MovieCardExtraInfo.propTypes = {
+  watchTrailer: PropTypes.func.isRequired,
+};

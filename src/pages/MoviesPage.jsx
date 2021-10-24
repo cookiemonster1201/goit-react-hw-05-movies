@@ -54,7 +54,7 @@ export default function MovieSearch() {
       <SearchBar onSubmit={handleSubmit} />
       {movies.length > 0 && (
         <>
-          <MovieList movies={movies} />
+          <MovieList movies={movies} location={location} />
           <LoadMoreButton
             onClick={() => {
               showMatches(searchQuery, searchPage + 1);

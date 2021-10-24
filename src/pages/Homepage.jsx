@@ -35,7 +35,7 @@ export default function Homepage() {
       <PageHeading text="Trending today" />
       {movies && (
         <>
-          <MovieList movies={movies} url={url} />
+          <MovieList movies={movies} url={url} location={location} />
           <LoadMoreButton
             onClick={() => {
               showMovies((searchPage += 1));

@@ -5,7 +5,8 @@ import s from './MovieCard.module.css';
 import MovieCardExtraInfo from 'components/MovieCardExtraInfo/MovieCardExtraInfo';
 
 export default function MovieCard({
-  movie: { id, title, overview, genres, backdrop_path, vote_average },
+  watchTrailer,
+  movie: { title, overview, genres, backdrop_path, vote_average },
 }) {
   const score = (vote_average * 100) / 10;
   const movieGenres = genres.map(genre => genre.name);
@@ -36,11 +37,12 @@ export default function MovieCard({
           })}{' '}
         </ul>
       </div>
-      <MovieCardExtraInfo />
+      <MovieCardExtraInfo watchTrailer={watchTrailer} />
     </>
   );
 }
 
 MovieCard.propTypes = {
   movie: PropTypes.object.isRequired,
+  watchTrailer: PropTypes.func.isRequired,
 };

@@ -41,3 +41,7 @@ export function getMovieCast(movieId) {
 export function getMovieReviews(movieId) {
   return fetchMovies(`/movie/${movieId}/reviews?api_key=${KEY}`);
 }
+
+export function getMovieTrailer(movieId) {
+  return fetchMovies(`/movie/${movieId}/videos?api_key=${KEY}`);
+}
