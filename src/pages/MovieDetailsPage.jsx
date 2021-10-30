@@ -36,7 +36,7 @@ export default function MovieDetailsPage() {
   const history = useHistory();
 
   const goBack = () => {
-    history.push(location.state.from ?? '/');
+    history.push(location?.state?.from ?? '/');
   };
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function MovieDetailsPage() {
           <MovieCard
             movie={movie}
             watchTrailer={toggleModal}
-            location={location.state.from}
+            location={location?.state?.from}
           />
         </>
       )}

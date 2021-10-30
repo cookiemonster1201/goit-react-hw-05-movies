@@ -5,7 +5,7 @@ import { getMovieReviews } from 'services/movieLib-api';
 import s from './Reviews.module.css';
 
 export default function Reviews({ movieId }) {
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     getMovieReviews(movieId).then(response => {

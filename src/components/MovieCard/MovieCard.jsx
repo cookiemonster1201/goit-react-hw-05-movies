@@ -46,5 +46,5 @@ export default function MovieCard({
 MovieCard.propTypes = {
   movie: PropTypes.object.isRequired,
   watchTrailer: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
+  location: PropTypes.object,
 };

@@ -5,7 +5,6 @@ export default function GoBackButton({ onClick }) {
       onClick={onClick}
       type="button"
       style={{
-        marginLeft: '300px',
         backgroundColor: 'palegreen',
         borderRadius: '4px',
       }}

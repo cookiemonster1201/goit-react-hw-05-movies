@@ -6,7 +6,7 @@ import defaultAvatar from './defaultAvatar.png';
 import s from './Cast.module.css';
 
 export default function Cast({ movieId }) {
-  const [cast, setCast] = useState(null);
+  const [cast, setCast] = useState([]);
 
   useEffect(() => {
     getMovieCast(movieId).then(response => {

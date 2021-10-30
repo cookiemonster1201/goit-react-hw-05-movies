@@ -1,11 +1,14 @@
-import { Route, Redirect, Switch } from 'react-router';
+import { Route, Redirect } from 'react-router';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { lazy, Suspense } from 'react';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'react-loader-spinner';
+import ThemeSwitcher from 'components/ThemeSwitcher/ThemeSwitcher';
+import { spring, AnimatedSwitch } from 'react-router-transition';
 
 import Navigation from 'components/Navigation/Navigation';
+import s from './transitions/route-transitions.module.css';
 
 const Homepage = lazy(
   () => import('./pages/Homepage') /* WebpackCHunkName: "homepage" */,
@@ -20,9 +23,39 @@ const MovieDetailsPage = lazy(
     ) /* WebpackCHunkName: "movie-details-page" */,
 );
 
+function bounce(val) {
+  return spring(val, {
+    stiffness: 330,
+    damping: 22,
+  });
+}
+function mapStyles(styles) {
+  return {
+    opacity: styles.opacity,
+    transform: `translate(-50%, 0) scale(${styles.scale})`,
+  };
+}
+const bounceTransition = {
+  atEnter: {
+    opacity: 0,
+    scale: 1.2,
+  },
+
+  atLeave: {
+    opacity: bounce(0),
+    scale: bounce(0.8),
+  },
+
+  atActive: {
+    opacity: bounce(1),
+    scale: bounce(1),
+  },
+};
+
 export default function App() {
   return (
     <>
+      <ThemeSwitcher />
       <Navigation />
 
       <Suspense
@@ -36,7 +69,13 @@ export default function App() {
           />
         }
       >
-        <Switch>
+        <AnimatedSwitch
+          atEnter={bounceTransition.atEnter}
+          atLeave={bounceTransition.atLeave}
+          atActive={bounceTransition.atActive}
+          mapStyles={mapStyles}
+          className={s.routeWrapper}
+        >
           <Route path="/" exact>
             <Homepage />
           </Route>
@@ -50,9 +89,9 @@ export default function App() {
           </Route>
 
           <Redirect to="/" />
-        </Switch>
-        <ToastContainer theme="colored" />
+        </AnimatedSwitch>
       </Suspense>
+      <ToastContainer theme="colored" />
     </>
   );
 }
